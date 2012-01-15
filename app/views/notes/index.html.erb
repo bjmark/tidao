@@ -3,7 +3,11 @@
   什么也没有，<%=link_to '新建',new_note_path%>一个吧
 <%else%>
   <%@files.each do |id,name|%>
-    <%=link_to name,note_path(id)%>
+    <%=link_to name,note_path(id),:style=>"color:#E36627;"%>
+    (<%=link_to '改',edit_note_path(id)%>
+    |
+    <%=link_to '删',note_path(id),:method=>:delete,:confirm=>'确定删除吗？'%>)
+    &nbsp;
   <%end%>
 <%end%>
 

@@ -1,30 +1,60 @@
 require 'yaml'
 
+class YFile
+  def initialize(file)
+    @file = file
+  end
+
+  def load
+    File.exist?(@file) ? YAML.load_file(@file) : {}
+  end
+
+  def save(hash)
+    File.open(@file,'w') {|f| YAML.dump(hash,f)}
+  end
+
+  def del(id)
+    h = load
+    item = nil
+
+    if h[id] 
+      item = [id,h[id]]
+      h.delete(id)
+      save(h)
+    end
+
+    return item
+  end
+
+  def [](id)
+    load()[id]
+  end
+
+  def add(id,name)
+    h = load
+    h[id] = name
+    save(h)
+  end
+
+end
+
 class Note 
   def initialize(user)
     @user = user
-  end
-
-  def index_file
-    "#{@user.root}/index.yaml"
+    @index = YFile.new("#{@user.root}/index.yaml")
+    @rubbish = YFile.new("#{@user.root}/rubbish.yaml")
+    @history = YFile.new("#{@user.root}/history.yaml")
   end
 
   def index
-    f = index_file
-    if File.exist?(f)
-      y = YAML.load_file(f)
-    else
-      y = {}
-    end
-
-    return y
+    @index.load
   end
 
   def create(name,content)
-    _index = index
-    new_id = (_index.keys.sort.last || 0) + 1
-    _index[new_id] = name
-    File.open(index_file,'w') {|f| YAML.dump(_index,f)}
+    his = @history.load
+    new_id = (his.keys.sort.last || 0) + 1
+    @history.add(new_id,name)
+    @index.add(new_id,name)
 
     f = "#{@user.root}/#{new_id}"
     File.open(f,'w') do |h|
@@ -36,8 +66,35 @@ class Note
 
   def [](id)
     f = "#{@user.root}/#{id}"
-    content = File.read(f) 
-    name = index[id.to_i]
-    return [name,content]
+    index = @index.load
+    if index[id] and File.exist?(f)
+      content = File.read(f) 
+      name = index[id]
+      return [name,content]
+    end
+
+    return nil
+  end
+
+  def del(id)
+    item = @index.del(id)
+    @rubbish.add(item[0],item[1]) if item
+  end
+
+  def update(id,name,content)
+    f = "#{@user.root}/#{id}"
+    index = @index.load
+
+    if index[id] and File.exist?(f)
+      index[id] = name
+      @index.save(index)
+
+      File.open(f,'w') do |h|
+        h.puts content
+      end
+      return true
+    end
+
+    return false
   end
 end

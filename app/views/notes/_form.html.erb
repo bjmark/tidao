@@ -1,0 +1,12 @@
+<%=form_tag(note_form_path,note_form_opt) do%>
+  文件名：<%=text_field_tag :name,@name,:size=>'30'%>
+  <%=submit_tag '保存'%>
+  <%if @name%>
+    (<%=link_to '显', note_path(@id)%>
+    |
+    <%=link_to '删', note_path(@id),:method=>:delete,:confirm=>'确定删除？'%>)
+  <%end%>
+  <br/>
+  <%=text_area_tag :content,@content,:size=>'80x30'%><br/>
+  <%=submit_tag '保存'%>
+<%end%>
