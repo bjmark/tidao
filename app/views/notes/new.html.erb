@@ -1,0 +1,6 @@
+<%=render 'menu'%>
+<%=form_tag notes_path do%>
+  文件名：<%=text_field_tag :file_name,nil,:size=>'30'%><br/>
+  <%=text_area_tag :content,nil,:size=>'80x30'%><br/>
+  <%=submit_tag '保存'%>
+<%end%>

@@ -1,0 +1,9 @@
+<%=render 'menu'%>
+<%if @files.empty?%>
+  什么也没有，<%=link_to '新建',new_note_path%>一个吧
+<%else%>
+  <%@files.each do |id,name|%>
+    <%=link_to name,note_path(id)%>
+  <%end%>
+<%end%>
+

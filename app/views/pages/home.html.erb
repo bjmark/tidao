@@ -1,3 +1,6 @@
-<p>欢迎！</p>
-<p><%=link_to '使用钥匙登录',new_session_path(:key=>'yes')%></p>
-<p>没有钥匙?，<%=link_to '去领一把',new_session_path(:key=>'no')%></p>
+<p>
+[<%=link_to '记事本',notes_path%>]
+[<%= link_to '退出', session_path, :method => :delete%>]
+</p>
+<hr>
+

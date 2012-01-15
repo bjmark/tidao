@@ -1,0 +1,10 @@
+<%=render 'menu'%>
+<style type="text/css">
+  h3 p {display:inline;}
+</style>
+<h3 style="display:inline;"><%=simple_format(@name)%></h3>
+[<%=link_to '编辑', edit_note_path(@id)%>]
+[<%=link_to '删除', note_path(@id),:method=>:delete,:confirm=>'确定删除？'%>]
+<div>
+  <%=simple_format(@content)%>
+</div>

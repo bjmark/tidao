@@ -1,6 +1,7 @@
 Tidao::Application.routes.draw do
   resources :pages,:only=>[:show]
   resource :session,:controller=>'session'
+  resources :notes
 =begin
   controller :session do
     match 'session/new'=>:new

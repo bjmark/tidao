@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Tidao</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div>
-    <h1>剃刀网</h1>
-    <p>如无必要，无增实体</p>
-  </div>
-  <hr>
-<%= yield %>
-
-</body>
+  <head>
+    <title>Tidao</title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div>
+      <h1 style="width:150px;float:left">
+        <a href="/"><span style="color:blue;">剃刀网</span></a>
+      </h1>
+      <p style="padding-top:35px;">如无必要，勿增实体</p>
+    </div>
+    <hr style="clear:both;">
+    <%= yield %>
+  </body>
 </html>
