@@ -1,11 +1,5 @@
 #coding=utf-8
 class SessionController < ApplicationController
-  def new
-    if params[:key] == 'no'
-      @key = User.create_key
-    end
-  end
-
   def create
     key = params[:key]
     user = User.where(:key=>key).first

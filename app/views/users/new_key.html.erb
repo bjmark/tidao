@@ -1,0 +1,12 @@
+<p>
+<%if flash[:note]%>
+  <%=flash[:note]%>
+<%else%>
+  请计算如下算式的结果：
+<%end%>
+<br/>
+<%=form_tag create_key_user_path do%>
+  <%=@a%> + <%=@b%> = <%=text_field_tag 'value'%> 
+  <%=submit_tag '生成钥匙'%>
+<%end%>
+</p>

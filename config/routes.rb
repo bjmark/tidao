@@ -2,6 +2,12 @@ Tidao::Application.routes.draw do
   resources :pages,:only=>[:show]
   resource :session,:controller=>'session'
   resources :notes
+  resources :users 
+
+  scope :path=>'/users',:controller=>:users do
+    get 'new/key' => :new_key, :as=>'new_key_user'
+    post 'creat/key' => :create_key, :as=>'create_key_user'
+  end
 =begin
   controller :session do
     match 'session/new'=>:new

@@ -1,0 +1,7 @@
+<p>
+保存好您的钥匙，因为每次登录都要用到。
+<%=form_tag session_path do |f|%>
+  钥匙：<%=text_field_tag :key,@key,:size=>48%>
+  <%=submit_tag '登录'%>
+<%end%>
+</p>
