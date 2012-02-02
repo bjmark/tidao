@@ -1,3 +1,22 @@
 <p>欢迎！</p>
-<p><%=link_to '使用钥匙登录',new_session_path(:key=>'yes')%></p>
-<p>没有钥匙?，<%=link_to '去领一把',new_key_user_path%></p
+<p>
+<%if flash[:login_with_key_message]%>
+  <span style="color:white;"><%=flash[:login_with_key_message]%></span><br>
+<%end%>
+<%=form_tag login_with_key_path do %>
+  钥匙：<%=password_field_tag :key,nil,:size=>32%>
+  <%=submit_tag '登录'%>
+  没有钥匙?,<%=link_to '去领一把.',new_key_user_path%>
+<%end%>
+</p>
+<p>--或者--</p>
+<p>
+<%if flash[:login_with_email_message]%>
+  <span style="color:white;"><%=flash[:login_with_email_message]%></span><br>
+<%end%>
+<%=form_tag login_with_email_path do %>
+  email：<%=text_field_tag :email,nil,:size=>32%><br/>
+  钥匙：<%=password_field_tag :pass,nil,:size=>32%><br/>
+  <%=submit_tag '登录'%>
+<%end%>
+</p>

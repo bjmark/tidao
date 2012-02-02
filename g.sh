@@ -5,4 +5,5 @@
 #bundle exec rake db:migrate
 #rails g migration add_key_index_to_user
 #rails g controller notes
-rails g controller users
+#rails g controller users
+rails g migration add_hashed_pass_to_user

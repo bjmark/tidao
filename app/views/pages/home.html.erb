@@ -1,5 +1,6 @@
 <p>
 [<%=link_to '记事本',notes_path%>]
+[<%=link_to '帐号',user_path(session[:user_id])%>]
 [<%= link_to '退出', session_path, :method => :delete%>]
 </p>
 <hr>

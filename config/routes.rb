@@ -1,13 +1,20 @@
 Tidao::Application.routes.draw do
   resources :pages,:only=>[:show]
+
+  scope :path=>'/session',:controller=>'session' do
+    post 'login_with_key' => :login_with_key , :as=>'login_with_key'
+    post 'login_with_email' => :login_with_email , :as=>'login_with_email'
+  end
   resource :session,:controller=>'session'
+
   resources :notes
-  resources :users 
 
   scope :path=>'/users',:controller=>:users do
-    get 'new/key' => :new_key, :as=>'new_key_user'
-    post 'creat/key' => :create_key, :as=>'create_key_user'
+    get 'new_key' => :new_key, :as=>'new_key_user'
+    post 'creat_key' => :create_key, :as=>'create_key_user'
   end
+
+  resources :users 
 =begin
   controller :session do
     match 'session/new'=>:new

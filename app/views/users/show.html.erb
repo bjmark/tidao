@@ -1,0 +1,19 @@
+<%=render 'menu'%>
+<%=form_tag user_path(@user),:method=>:put do%>
+  <p>
+  用户名 : <%=text_field_tag 'name',@user.name%>
+  <button name='save_user_name'>保存用户名</button>
+  <%=@name_message%>
+  </p>
+  <p>
+  Email : <%=text_field_tag 'email',@user.email%>
+  <button name='save_user_email'>保存email</button>
+  <%=@email_message%>
+  </p>
+  <p>
+  密码 : <%=password_field_tag 'pass'%> 
+  <button name='save_user_pass'>保存密码</button>
+  <%=@pass_message%>
+  </p>
+<%end%>
+钥匙 : <%=@user.key%>
